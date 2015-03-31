@@ -4,13 +4,9 @@ reader = csv.reader(open("blsdata.csv", "rU"), dialect = csv.excel)
 
 reader.next()
 
-blslist = []
+blslist = [row for row in reader]
 
-for row in reader:
-    blslist.append(row)
-	
-currentyear = blslist[-1]
-currentyear = filter(None,currentyear)
+currentyear = filter(None,blslist[-1])
 
 yearlen = len(currentyear)
 
@@ -42,5 +38,7 @@ pctchange = ((float(currentmonth)-float(previousmonth))/float(previousmonth)*100
 
 # so the %change does print as a negative number: print verb, abs(pctchange)
 
-print "The Labor Department reported on Sept. 5 that the unemployment rate %s to %s percent in Aug. That's down 1.1 percentage points campared to %s percent in Aug. 2013." % (verb, currentyear[-1], previousyear[-6])
+print("The Labor Department reported on Sept."
+	"5 that the unemployment rate {} to {} percent in Aug."
+	"That's down 1.1 percentage points campared to {} percent in Aug. 2013.".format((verb, currentyear[-1], previousyear[-6]))
 
